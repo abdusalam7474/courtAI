@@ -17,6 +17,7 @@ def predict_intrusion(data, model):
         predicted_category = "Possible Attack"
     return predicted_category, df
 
+@st.cache_resorces()
 def preset_inputs(dfc):
   random_selections = {}
   # Get a random index
@@ -25,11 +26,17 @@ def preset_inputs(dfc):
   random_item = dfc[(r_i-1):r_i]
   return random_item
 
-dfz = pd.read_csv("Texas_Department_dataset.csv")
-#coverting date to date-time objects
-dfz["Release Date"] = pd.to_datetime(dfz["Release Date"])
-dfz["Sentence Date"] = pd.to_datetime(dfz["Sentence Date"])
-dfz["Offense Date"] = pd.to_datetime(dfz["Offense Date"])
+@st.cache_resorces()
+def load_data():
+    dfz = pd.read_csv("Texas_Department_dataset.csv")
+    #coverting date to date-time objects
+    dfz["Release Date"] = pd.to_datetime(dfz["Release Date"])
+    dfz["Sentence Date"] = pd.to_datetime(dfz["Sentence Date"])
+    dfz["Offense Date"] = pd.to_datetime(dfz["Offense Date"])
+    
+    return dfz
+
+dfz = load_data()
 preset = preset_inputs(dfz)
 
 # Data structure to hold user input (replace with actual feature names)
@@ -49,15 +56,19 @@ user_input = {
   }
 }
 
-loaded_rf = joblib.load('rf_model.pkl')
-loaded_svm = joblib.load('svm_model.pkl')
-loaded_dt = joblib.load('dtree_model.pkl')
-models = {
+@st.cache_resources
+def load_models():
+   loaded_rf = joblib.load('rf_model.pkl')
+   loaded_svm = joblib.load('svm_model.pkl')
+   loaded_dt = joblib.load('dtree_model.pkl')
+   models = {
     "Random forest":loaded_rf,
     "Support Vector Machine":loaded_svm,
     "Decision Tree":loaded_dt,
-}
+   }
+   return models
 
+models = load_models()
 theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
 race_opts = [(preset["Race"]).iloc[0], 'White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
