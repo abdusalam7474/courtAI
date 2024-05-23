@@ -128,7 +128,7 @@ with col1:
     theft_or_larcency = st.selectbox("THEFT OR LARCENCY DEFINITION", theft_or_larc_opts, key="theft_descr")
     #user_input[0]["Offense Description"] = st.selectbox("Offense Description", value=(preset["Offense Description"]).iloc[0])
 with col2:
-    amount = st.selectbox("Amount or Worth of Stolen Item", amount_opts, key="amount_in_que")
+    amount = st.selectbox("Amount or Worth of Stolen Item ($)", amount_opts, key="amount_in_que")
 with col3:
     prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
 # Prediction button and results section
