@@ -25,27 +25,23 @@ def preset_inputs(dfc):
   random_item = dfc[(r_i-1):r_i]
   return random_item
 
-dfz = pd.read_csv("my_data2.csv")
+dfz = pd.read_csv("Texas_Department_dataset.csv")
 preset = preset_inputs(dfz)
 
 # Data structure to hold user input (replace with actual feature names)
 user_input = {
   0: {
-    "MI_dir_L0.1_weight": None,
-    "H_L0.1_weight": None,
-    "HH_L0.1_weight": None,
-    "HH_L0.1_std": None,
-    "HH_L0.1_radius": None,
-    "HH_L0.1_covariance": None,
-    "HH_L0.1_pcc": None,
-    "HH_jit_L0.1_weight": None,
-    "HH_jit_L0.1_mean": None,
-    "HpHp_L0.1_std": None,
-    "HpHp_L0.1_radius": None,
-    "HpHp_L0.1_covariance": None,
-    "HpHp_L0.1_pcc": None,
-    "Attack": None,
-    "Attack_subType": None,
+    "Release Date": None,
+    "Inmate Type": None,
+    "Gender": None,
+    "Race": None,    
+    "Age": None,
+    "County": None,
+    "Offense": None,
+    "Offense Description": None,
+    "Sentence Date": None,
+    "Offense Date": None,
+    #"Sentence (Years)": None,
   }
 }
 
@@ -57,6 +53,17 @@ models = {
     "Support Vector Machine":loaded_svm,
     "Decision Tree":loaded_dt,
 }
+
+theft_or_larc_opts = ["THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
+amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
+race_opts = ['White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
+inmate_opts = ['G2', 'FT', 'J2', 'DP', 'IT', 'OT', 'J1', 'MD', 'G1', 'G4', 'S1', 'PR', 'P2', 'G5', 'RP', 'MH', 'J5', 'J4', 'VI', 'PS', 'RF', 'PJ', '1A', 'XX', 'CG', 'CP', 'II', 'P4']
+offense_opts = ['Property']
+gender_opts = ['M', 'F']
+#age_opts
+county_opts = ['Houston', 'Dallas', 'Victoria', 'Angelina', 'Hopkins', 'Travis', 'Johnson', 'Ellis', 'Montgomery', 'Jefferson', 'Fannin', 'Guadalupe', 'Taylor', 'Nueces', 'Harris', 'Bexar', 'Ector', 'Galveston', 'Denton', 'Midland', 'Tarrant', 'Williamson', 'Potter', 'Lubbock', 'Rockwall', 'Leon', 'Bowie', 'San Patricio', 'Hays', 'Nacogdoches', 'Smith', 'Lamar', 'Navarro', 'Wharton', 'Hidalgo', 'Hood']
+
+
 
 st.set_page_config(page_title="IoT Intrusion Detection", layout="wide")
 
@@ -89,20 +96,19 @@ st.markdown(
 st.header("Sensor Readings")
 col1, col2, col3 = st.columns(3)
 with col1:
-    user_input[0]["MI_dir_L0.1_weight"] = st.number_input("MI_dir_L0.1_weight", value=(preset["MI_dir_L0.1_weight"]).iloc[0], format="%.15f")
-    user_input[0]["H_L0.1_weight"] = st.number_input("H_L0.1_weight", value=(preset["H_L0.1_weight"]).iloc[0], format="%.15f")
-    user_input[0]["HH_L0.1_pcc"] = st.number_input("HH_L0.1_pcc", value=(preset["HH_L0.1_pcc"]).iloc[0], format="%.15f")
-    user_input[0]["HH_jit_L0.1_weight"] = st.number_input("HH_jit_L0.1_weight", value=(preset["HH_jit_L0.1_weight"]).iloc[0], format="%.15f")
+    user_input[0]["Race"] = st.selectbox("Race", race_opts, value=(preset["Race"]).iloc[0])
+    user_input[0][" Inmate Type"] = st.selectbox(" Inmate Type", inmate_opts, value=(preset[" Inmate Type"]).iloc[0])
+    user_input[0]["Offense Date"] = st.date_input("Offense Date", value=(preset["Offense Date"]).iloc[0], format=%d/%m/%Y")
 with col2:
-    user_input[0]["HH_L0.1_weight"] = st.number_input("HH_L0.1_weight", value=(preset["HH_L0.1_weight"]).iloc[0], format="%.15f")
-    user_input[0]["HH_L0.1_std"] = st.number_input("HH_L0.1_std", value=(preset["HH_L0.1_std"]).iloc[0], format="%.15f")
-    user_input[0]["HH_jit_L0.1_mean"] = st.number_input("HH_jit_L0.1_mean", value=(preset["HH_jit_L0.1_mean"]).iloc[0], format="%.15f")
-    user_input[0]["HpHp_L0.1_std"] = st.number_input("HpHp_L0.1_std", value=(preset["HpHp_L0.1_std"]).iloc[0], format="%.15f")
+    user_input[0]["Gender"] = st.selectbox("Gender", gender_opts, value=(preset["Gender"]).iloc[0])
+    user_input[0]["Age"] = st.number_input("Age", value=(preset["Age"]).iloc[0])
+    user_input[0]["Sentence Date"] = st.date_input("Sentence Date", value=(preset["Sentence Date"]).iloc[0], format=%d/%m/%Y")
+    #user_input[0]["Sentence (Years)"] = st.selectbox("Sentence (Years)", value=(preset["Sentence (Years)"]).iloc[0])
 with col3:
-    user_input[0]["HH_L0.1_radius"] = st.number_input("HH_L0.1_radius", value=(preset["HH_L0.1_radius"]).iloc[0], format="%.15f")
-    user_input[0]["HH_L0.1_covariance"] = st.number_input("HH_L0.1_covariance", value=(preset["HH_L0.1_covariance"]).iloc[0], format="%.15f")
-    user_input[0]["HpHp_L0.1_radius"] = st.number_input("HpHp_L0.1_radius", value=(preset["HpHp_L0.1_radius"]).iloc[0], format="%.15f")
-    user_input[0]["HpHp_L0.1_covariance"] = st.number_input("HpHp_L0.1_covariance", value=(preset["HpHp_L0.1_covariance"]).iloc[0], format="%.15f")
+    user_input[0]["County"] = st.selectbox("County", county_opts, value=(preset["County"]).iloc[0])
+    user_input[0]["Offense"] = st.selectbox("Offense", offense_opts, value=(preset["Offense"]).iloc[0])
+    user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format=%d/%m/%Y")
+
 st.markdown(
     """
     **mapping for attack subtypes:** {'combo': 0, 'junk': 1, 'scan': 2, 'tcp': 3, 'udp': 4, 'ack': 5, 'syn': 6, 'udpplain': 7, 'Normal': 8}.
@@ -113,13 +119,14 @@ st.markdown(
     **mapping for attack types:** {'gafgyt': 0, 'mirai': 1, 'Normal': 2}.
     """
 )
-col1, col2 = st.columns(2)
+col1, col2, col3= st.columns(3)
 with col1:
-    user_input[0]["Attack"] = st.number_input("Attack", value=(preset["Attack"]).iloc[0], min_value=(0), max_value=(2))
-    user_input[0]["HpHp_L0.1_pcc"] = st.number_input("HpHp_L0.1_pcc", value=(preset["HpHp_L0.1_pcc"]).iloc[0], format="%.15f")
+    theft_or_larcency = st.selectbox("THEFT OR LARCENCY DEFINITION", theft_or_larc_opts, key="theft_descr")
+    #user_input[0]["Offense Description"] = st.selectbox("Offense Description", value=(preset["Offense Description"]).iloc[0])
 with col2:
-    user_input[0]["Attack_subType"] = st.number_input("Attack_subType", value=(preset["Attack_subType"]).iloc[0], min_value=(0), max_value=(8))
-
+    amount = st.selectbox("Amount or Worth of Stolen Item", amount_opts, key="amount_in_que")
+with col3:
+    prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
 # Prediction button and results section
 predict_button = st.button("Predict")
 
