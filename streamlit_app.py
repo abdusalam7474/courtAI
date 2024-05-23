@@ -44,7 +44,7 @@ user_input = {
   0: {
     "Release Date": None,
     "Inmate Type": None,
- .   "Gender": None,
+    "Gender": None,
     "Race": None,    
     "Age": None,
     "County": None,
