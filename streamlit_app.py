@@ -17,7 +17,7 @@ def predict_intrusion(data, model):
         predicted_category = "Possible Attack"
     return predicted_category, df
 
-@st.cache_resorces()
+@st.cache_resources()
 def preset_inputs(dfc):
   random_selections = {}
   # Get a random index
@@ -26,7 +26,7 @@ def preset_inputs(dfc):
   random_item = dfc[(r_i-1):r_i]
   return random_item
 
-@st.cache_resorces()
+@st.cache_resources()
 def load_data():
     dfz = pd.read_csv("Texas_Department_dataset.csv")
     #coverting date to date-time objects
@@ -44,7 +44,7 @@ user_input = {
   0: {
     "Release Date": None,
     "Inmate Type": None,
-    "Gender": None,
+ .   "Gender": None,
     "Race": None,    
     "Age": None,
     "County": None,
