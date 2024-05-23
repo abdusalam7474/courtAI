@@ -19,6 +19,17 @@ def predict_intrusion(data, model):
         predicted_category = "Possible Attack"
     return predicted_category, df
 
+def predict_intrusion_(data, model):
+    df = pd.DataFrame.from_dict(data, orient='index')
+    #df = df.transpose()
+    #pred = model.predict(df)
+    pred = [0,1]
+    if pred[0] == 1:
+        predicted_category = "Normal"
+    else:
+        predicted_category = "Possible Attack"
+    return predicted_category, df
+    
 @st.cache_resource
 def preset_inputs(dfc):
   random_selections = {}
