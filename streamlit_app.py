@@ -6,6 +6,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 
+st.set_page_config(page_title="Court Case Prediction", layout="wide")
+
 # (Replace with your actual machine learning model)
 def predict_intrusion(data, model):
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -78,7 +80,6 @@ gender_opts = [(preset["Gender"]).iloc[0], 'M', 'F']
 #age_opts
 county_opts = [(preset["County"]).iloc[0], 'Houston', 'Dallas', 'Victoria', 'Angelina', 'Hopkins', 'Travis', 'Johnson', 'Ellis', 'Montgomery', 'Jefferson', 'Fannin', 'Guadalupe', 'Taylor', 'Nueces', 'Harris', 'Bexar', 'Ector', 'Galveston', 'Denton', 'Midland', 'Tarrant', 'Williamson', 'Potter', 'Lubbock', 'Rockwall', 'Leon', 'Bowie', 'San Patricio', 'Hays', 'Nacogdoches', 'Smith', 'Lamar', 'Navarro', 'Wharton', 'Hidalgo', 'Hood']
 
-st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
 # Sidebar for user convenience
 with st.sidebar:
