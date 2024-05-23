@@ -26,6 +26,10 @@ def preset_inputs(dfc):
   return random_item
 
 dfz = pd.read_csv("Texas_Department_dataset.csv")
+#coverting date to date-time objects
+dfz["Release Date"] = pd.to_datetime(dfz["Release Date"])
+dfz["Sentence Date"] = pd.to_datetime(dfz["Sentence Date"])
+dfz["Offense Date"] = pd.to_datetime(dfz["Offense Date"])
 preset = preset_inputs(dfz)
 
 # Data structure to hold user input (replace with actual feature names)
