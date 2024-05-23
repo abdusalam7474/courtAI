@@ -54,14 +54,14 @@ models = {
     "Decision Tree":loaded_dt,
 }
 
-theft_or_larc_opts = ["THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
+theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
-race_opts = ['White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
-inmate_opts = ['G2', 'FT', 'J2', 'DP', 'IT', 'OT', 'J1', 'MD', 'G1', 'G4', 'S1', 'PR', 'P2', 'G5', 'RP', 'MH', 'J5', 'J4', 'VI', 'PS', 'RF', 'PJ', '1A', 'XX', 'CG', 'CP', 'II', 'P4']
-offense_opts = ['Property']
-gender_opts = ['M', 'F']
+race_opts = [(preset["Race"]).iloc[0], 'White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
+inmate_opts = [(preset["Inmate Type"]).iloc[0], 'G2', 'FT', 'J2', 'DP', 'IT', 'OT', 'J1', 'MD', 'G1', 'G4', 'S1', 'PR', 'P2', 'G5', 'RP', 'MH', 'J5', 'J4', 'VI', 'PS', 'RF', 'PJ', '1A', 'XX', 'CG', 'CP', 'II', 'P4']
+offense_opts = [(preset["Offense"]).iloc[0]]
+gender_opts = [(preset["Gender"]).iloc[0], 'M', 'F']
 #age_opts
-county_opts = ['Houston', 'Dallas', 'Victoria', 'Angelina', 'Hopkins', 'Travis', 'Johnson', 'Ellis', 'Montgomery', 'Jefferson', 'Fannin', 'Guadalupe', 'Taylor', 'Nueces', 'Harris', 'Bexar', 'Ector', 'Galveston', 'Denton', 'Midland', 'Tarrant', 'Williamson', 'Potter', 'Lubbock', 'Rockwall', 'Leon', 'Bowie', 'San Patricio', 'Hays', 'Nacogdoches', 'Smith', 'Lamar', 'Navarro', 'Wharton', 'Hidalgo', 'Hood']
+county_opts = [(preset["County"]).iloc[0], 'Houston', 'Dallas', 'Victoria', 'Angelina', 'Hopkins', 'Travis', 'Johnson', 'Ellis', 'Montgomery', 'Jefferson', 'Fannin', 'Guadalupe', 'Taylor', 'Nueces', 'Harris', 'Bexar', 'Ector', 'Galveston', 'Denton', 'Midland', 'Tarrant', 'Williamson', 'Potter', 'Lubbock', 'Rockwall', 'Leon', 'Bowie', 'San Patricio', 'Hays', 'Nacogdoches', 'Smith', 'Lamar', 'Navarro', 'Wharton', 'Hidalgo', 'Hood']
 
 
 
@@ -96,17 +96,17 @@ st.markdown(
 st.header("Sensor Readings")
 col1, col2, col3 = st.columns(3)
 with col1:
-    user_input[0]["Race"] = st.selectbox("Race", race_opts, value=(preset["Race"]).iloc[0])
-    user_input[0][" Inmate Type"] = st.selectbox(" Inmate Type", inmate_opts, value=(preset[" Inmate Type"]).iloc[0])
+    user_input[0]["Race"] = st.selectbox("Race", race_opts)
+    user_input[0][" Inmate Type"] = st.selectbox(" Inmate Type", inmate_opts)
     user_input[0]["Offense Date"] = st.date_input("Offense Date", value=(preset["Offense Date"]).iloc[0], format="%d/%m/%Y")
 with col2:
-    user_input[0]["Gender"] = st.selectbox("Gender", gender_opts, value=(preset["Gender"]).iloc[0])
+    user_input[0]["Gender"] = st.selectbox("Gender", gender_opts)
     user_input[0]["Age"] = st.number_input("Age", value=(preset["Age"]).iloc[0])
     user_input[0]["Sentence Date"] = st.date_input("Sentence Date", value=(preset["Sentence Date"]).iloc[0], format="%d/%m/%Y")
     #user_input[0]["Sentence (Years)"] = st.selectbox("Sentence (Years)", value=(preset["Sentence (Years)"]).iloc[0])
 with col3:
-    user_input[0]["County"] = st.selectbox("County", county_opts, value=(preset["County"]).iloc[0])
-    user_input[0]["Offense"] = st.selectbox("Offense", offense_opts, value=(preset["Offense"]).iloc[0])
+    user_input[0]["County"] = st.selectbox("County", county_opts)
+    user_input[0]["Offense"] = st.selectbox("Offense", offense_opts)
     user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="%d/%m/%Y")
 
 st.markdown(
