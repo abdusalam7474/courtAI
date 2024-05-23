@@ -17,7 +17,7 @@ def predict_intrusion(data, model):
         predicted_category = "Possible Attack"
     return predicted_category, df
 
-@st.cache_resources()
+@st.cache_resource
 def preset_inputs(dfc):
   random_selections = {}
   # Get a random index
@@ -26,7 +26,7 @@ def preset_inputs(dfc):
   random_item = dfc[(r_i-1):r_i]
   return random_item
 
-@st.cache_resources()
+@st.cache_resource
 def load_data():
     dfz = pd.read_csv("Texas_Department_dataset.csv")
     #coverting date to date-time objects
@@ -56,7 +56,7 @@ user_input = {
   }
 }
 
-@st.cache_resources
+@st.cache_resource
 def load_models():
    loaded_rf = joblib.load('rf_model.pkl')
    loaded_svm = joblib.load('svm_model.pkl')
