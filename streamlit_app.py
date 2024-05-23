@@ -67,9 +67,7 @@ gender_opts = [(preset["Gender"]).iloc[0], 'M', 'F']
 #age_opts
 county_opts = [(preset["County"]).iloc[0], 'Houston', 'Dallas', 'Victoria', 'Angelina', 'Hopkins', 'Travis', 'Johnson', 'Ellis', 'Montgomery', 'Jefferson', 'Fannin', 'Guadalupe', 'Taylor', 'Nueces', 'Harris', 'Bexar', 'Ector', 'Galveston', 'Denton', 'Midland', 'Tarrant', 'Williamson', 'Potter', 'Lubbock', 'Rockwall', 'Leon', 'Bowie', 'San Patricio', 'Hays', 'Nacogdoches', 'Smith', 'Lamar', 'Navarro', 'Wharton', 'Hidalgo', 'Hood']
 
-
-
-st.set_page_config(page_title="IoT Intrusion Detection", layout="wide")
+st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
 # Sidebar for user convenience
 with st.sidebar:
@@ -78,12 +76,12 @@ with st.sidebar:
     model_name = st.selectbox("select the model for prediction", ["Random forest", "Support Vector Machine", "Decision Tree"])
     selected_model = models[model_name]
 
-st.title("IoT Intrusion Detection App")
+st.title("Court Case Prediction App")
 
 # Overview section
 st.markdown(
     """
-    This app is built to help detect potential intrusions in an IoT network by analyzing data from your devices. It utilizes a machine learning model we trained to classify various readings as normal or indicative of an intrusion attempt.
+    This app is built to help predict rullings of court cases by predicting the potential release type of a convicted individual. It utilizes a machine learning model we trained to classify cases into a potential release type.
 
     **How to Use:**
 
@@ -92,12 +90,12 @@ st.markdown(
     3. Click the "Predict" button.
     4. The app will display the predicted category ("Normal" or "Intrusion") and the provided sensor readings in a DataFrame.
 
-    **Disclaimer:** This app is for demonstration purposes only. The accuracy of the predictions depends on the quality of the underlying machine learning model and sensor data. For real-world security applications, consult with security professionals.
+    **Disclaimer:** This app is for demonstration purposes only. The accuracy of the predictions depends on the quality of the underlying machine learning model and sensor data. For real-world legal applications, consult with legal professionals.
     """
 )
 
 # Input section
-st.header("Sensor Readings")
+st.header("Case Details")
 col1, col2, col3 = st.columns(3)
 with col1:
     user_input[0]["Race"] = st.selectbox("Race", race_opts)
@@ -113,16 +111,6 @@ with col3:
     user_input[0]["Offense"] = st.selectbox("Offense", offense_opts)
     user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="DD/MM/YYYY")
 
-st.markdown(
-    """
-    **mapping for attack subtypes:** {'combo': 0, 'junk': 1, 'scan': 2, 'tcp': 3, 'udp': 4, 'ack': 5, 'syn': 6, 'udpplain': 7, 'Normal': 8}.
-    """
-)
-st.markdown(
-    """    
-    **mapping for attack types:** {'gafgyt': 0, 'mirai': 1, 'Normal': 2}.
-    """
-)
 col1, col2, col3= st.columns(3)
 with col1:
     theft_or_larcency = st.selectbox("THEFT OR LARCENCY DEFINITION", theft_or_larc_opts, key="theft_descr")
