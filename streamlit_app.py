@@ -98,16 +98,16 @@ col1, col2, col3 = st.columns(3)
 with col1:
     user_input[0]["Race"] = st.selectbox("Race", race_opts, value=(preset["Race"]).iloc[0])
     user_input[0][" Inmate Type"] = st.selectbox(" Inmate Type", inmate_opts, value=(preset[" Inmate Type"]).iloc[0])
-    user_input[0]["Offense Date"] = st.date_input("Offense Date", value=(preset["Offense Date"]).iloc[0], format=%d/%m/%Y")
+    user_input[0]["Offense Date"] = st.date_input("Offense Date", value=(preset["Offense Date"]).iloc[0], format="%d/%m/%Y")
 with col2:
     user_input[0]["Gender"] = st.selectbox("Gender", gender_opts, value=(preset["Gender"]).iloc[0])
     user_input[0]["Age"] = st.number_input("Age", value=(preset["Age"]).iloc[0])
-    user_input[0]["Sentence Date"] = st.date_input("Sentence Date", value=(preset["Sentence Date"]).iloc[0], format=%d/%m/%Y")
+    user_input[0]["Sentence Date"] = st.date_input("Sentence Date", value=(preset["Sentence Date"]).iloc[0], format="%d/%m/%Y")
     #user_input[0]["Sentence (Years)"] = st.selectbox("Sentence (Years)", value=(preset["Sentence (Years)"]).iloc[0])
 with col3:
     user_input[0]["County"] = st.selectbox("County", county_opts, value=(preset["County"]).iloc[0])
     user_input[0]["Offense"] = st.selectbox("Offense", offense_opts, value=(preset["Offense"]).iloc[0])
-    user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format=%d/%m/%Y")
+    user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="%d/%m/%Y")
 
 st.markdown(
     """
