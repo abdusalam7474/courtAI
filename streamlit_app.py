@@ -28,7 +28,7 @@ def predict_intrusion_(data, model):
        [("text_preprocess", vect, "Sentence (Years)"),
        ("text_preprocess2", "drop", "Offense Description"),
        ], verbose=True, remainder='drop')
-    X_trans_ = ct_.fit_transform(train_data)
+    X_trans_ = ct_.fit_transform(df)
     pred = [0,1]
     if pred[0] == 1:
         predicted_category = "Normal"
