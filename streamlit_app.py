@@ -153,7 +153,7 @@ with col3:
 predict_button = st.button("Predict")
 
 if predict_button:
-    predicted_category, data_df = predict_intrusion(user_input, selected_model)
+    predicted_category, data_df = predict_intrusion_(user_input, selected_model)
     st.subheader("Prediction Results")
     st.dataframe(data_df)
     st.write("Predicted Category:", predicted_category)
