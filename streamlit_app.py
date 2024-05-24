@@ -5,6 +5,7 @@ import joblib
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.compose import ColumnTransformer
 
 st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
@@ -23,6 +24,11 @@ def predict_intrusion_(data, model):
     df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
     #pred = model.predict(df)
+    ct_ = ColumnTransformer(
+       [("text_preprocess", vect, "Sentence (Years)"),
+       ("text_preprocess2", "drop", "Offense Description"),
+       ], verbose=True, remainder='drop')
+    X_trans_ = ct_.fit_transform(train_data)
     pred = [0,1]
     if pred[0] == 1:
         predicted_category = "Normal"
@@ -74,14 +80,15 @@ def load_models():
    loaded_rf = joblib.load('rf_model.pkl')
    loaded_svm = joblib.load('svm_model.pkl')
    loaded_dt = joblib.load('dtree_model.pkl')
+   vect = joblib.load('count_vect.pkl')
    models = {
     "Random forest":loaded_rf,
     "Support Vector Machine":loaded_svm,
     "Decision Tree":loaded_dt,
    }
-   return models
+   return models, vect
 
-models = load_models()
+models, vect = load_models()
 theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
 race_opts = [(preset["Race"]).iloc[0], 'White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
