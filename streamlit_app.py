@@ -152,7 +152,7 @@ with col3:
 predict_button = st.button("Predict")
 
 if predict_button:
-    user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0])
+    user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
     predicted_category, data_df = predict_intrusion_(user_input, selected_model)
     st.subheader("Prediction Results")
     st.dataframe(data_df)
