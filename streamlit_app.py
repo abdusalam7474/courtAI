@@ -140,11 +140,11 @@ with col3:
     user_input[0]["Offense"] = st.selectbox("Offense", offense_opts)
     user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="DD/MM/YYYY")
 
-col1, col2, col3= st.columns(3)
 st.markdown(
     """
     **Use the following options to describe the offence;**
     """)
+col1, col2, col3 = st.columns(3)
 with col1:
     theft_or_larcency = st.selectbox("THEFT OR LARCENCY DEFINITION", theft_or_larc_opts, key="theft_descr")
     #user_input[0]["Offense Description"] = st.selectbox("Offense Description", value=(preset["Offense Description"]).iloc[0])
@@ -153,12 +153,11 @@ with col2:
 with col3:
     prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
 
+col1, col2 = st.columns()
 st.markdown(
     """
     **Use the following options to describe the Sentence time:**
     """)
-import streamlit as st
-
 # Define the list of options
 options = [
     "2 Years & Less", "SAFPF", "11 to 12 Months", "31 to 40 Years",
@@ -193,7 +192,6 @@ with col2:
         months_options = [opt for opt in options if "Months" in opt]
         months_selected = st.selectbox("Select Age Range (Months)", months_options)
         user_input["Sentence (Years)"] = months_selected
-
 # Display the user input
 if user_input["Sentence (Years)"] is not None:
     st.write("Your selected input:", user_input["Sentence (Years)"])
