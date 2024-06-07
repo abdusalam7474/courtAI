@@ -185,7 +185,7 @@ options = [
 ]
 
 # Create empty user_input dictionary
-user_input = {}
+#user_input = {}
 #user_input["Sentence (Years)"] = None
 
 # Create radio buttons for categories (Years, Months)
@@ -197,13 +197,13 @@ with col2:
     if category_selected == "Years":
         years_options = [opt for opt in options if "Years" in opt]
         years_selected = st.selectbox("Select Age Range (Years)", years_options)
-        user_input["Sentence (Years)"] = years_selected
+        user_input[0]["Sentence (Years)"] = years_selected
 
     # Months options
     elif category_selected == "Months":
         months_options = [opt for opt in options if "Months" in opt]
         months_selected = st.selectbox("Select Age Range (Months)", months_options)
-        user_input["Sentence (Years)"] = months_selected
+        user_input[0]["Sentence (Years)"] = months_selected
 # Display the user input
 if user_input["Sentence (Years)"] is not None:
     st.write("Sentence Years:", user_input["Sentence (Years)"])
