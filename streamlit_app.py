@@ -77,9 +77,9 @@ def load_models():
    loaded_rf = joblib.load('rf_model_2i.pkl')
    loaded_svm = joblib.load('svm_model.pkl')
    loaded_dt = joblib.load('dtree_model.pkl')
-   vect1 = joblib.load('count_vect.pkl')
-   vect2 = joblib.load('count_vect_o.pkl') 
-   vect3 = joblib.load('count_vect_y.pkl')
+   vect1 = joblib.load('col_tf_2i.pkl')
+   vect2 = joblib.load('col_tf_y.pkl') 
+   vect3 = joblib.load('col_tf_ai.pkl')
     
    models = {
     "Random forest":loaded_rf,
@@ -87,8 +87,9 @@ def load_models():
     "Decision Tree":loaded_dt,
    }
    vects = {
-       "count_vect_o": vect2,
-       "count_vect_y": vect3
+       "col_tf_2i": vect1,
+       "col_tf_sy": vect2,
+       "col_tf_ai": vect3
    }
    return models, vects
 
@@ -216,11 +217,7 @@ if predict_button:
     #convert user input to dataframe
     user_input_df = pd.DataFrame.from_dict(user_input, orient='index')
     #vectorize inputs
-    ct_ = ColumnTransformer(
-        [("text_preprocess", vects["count_vect_y"], "Sentence (Years)"),
-         ("text_preprocess2", vects["count_vect_o"], "Offense Description"),
-        ], verbose=True, remainder='drop')
-    input_trans = ct_.fit_transform(user_input_df)
+    input_trans = vects["col_tf_2i"].transform(user_input_df)
 
     predicted_category = predict_case(input_trans, selected_model)
     st.subheader("Unprocessed user inputs")
