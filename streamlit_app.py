@@ -10,10 +10,11 @@ from sklearn.compose import ColumnTransformer
 st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
 # (Replace with your actual machine learning model)
-def predict_intrusion(data, model):
+def predict_case(data, model):
     df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
-    pred = model.predict(df)
+    #pred = model.predict(data)
+    pred = [0,1]
     if pred[0] == 1:
         predicted_category = "Normal"
     else:
@@ -70,7 +71,7 @@ user_input = {
     "Offense Description": None,
     "Sentence Date": None,
     "Offense Date": None,
-    #"Sentence (Years)": None,
+    "Sentence (Years)": None,
   }
 }
 
@@ -79,15 +80,23 @@ def load_models():
    loaded_rf = joblib.load('rf_model.pkl')
    loaded_svm = joblib.load('svm_model.pkl')
    loaded_dt = joblib.load('dtree_model.pkl')
-   vect = joblib.load('count_vect.pkl')
+   vect1 = joblib.load('count_vect.pkl')
+   vect2 = joblib.load('count_vect_o.pkl') 
+   vect3 = joblib.load('count_vect_y.pkl')
+    
    models = {
     "Random forest":loaded_rf,
     "Support Vector Machine":loaded_svm,
     "Decision Tree":loaded_dt,
    }
-   return models, vect
+   vects = {
+       "count_vect_o": vect2
+       "count_vect_y": vect3
+   }
+   return models, vects
 
-models, vect = load_models()
+models, vects = load_models()
+
 theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
 race_opts = [(preset["Race"]).iloc[0], 'White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
@@ -205,6 +214,15 @@ predict_button = st.button("Predict")
 
 if predict_button:
     user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
+    user_input[0]["Sentence (Years)"] = (preset["Sentence (Years)"]).iloc[0]
+    #vectorize inputs
+
+    ct_ = ColumnTransformer(
+        [("text_preprocess", vects["count_vect_y"], "Sentence (Years)"),
+         ("text_preprocess2", vects["count_vect_o"], "Offense Description"),
+        ], verbose=True, remainder='drop')
+    input_trans = ct_.fit_transform(user_input)
+
     predicted_category, data_df = predict_intrusion_(user_input, selected_model)
     st.subheader("Prediction Results")
     st.dataframe(data_df)
