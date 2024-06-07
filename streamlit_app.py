@@ -137,7 +137,7 @@ st.header("Case Details")
 col1, col2, col3 = st.columns(3)
 with col1:
     user_input[0]["Race"] = st.selectbox("Race", race_opts)
-    user_input[0][" Inmate Type"] = st.selectbox(" Inmate Type", inmate_opts)
+    user_input[0]["Inmate Type"] = st.selectbox("Inmate Type", inmate_opts)
     user_input[0]["Offense Date"] = st.date_input("Offense Date", value=(preset["Offense Date"]).iloc[0], format="DD/MM/YYYY")
 with col2:
     user_input[0]["Gender"] = st.selectbox("Gender", gender_opts)
