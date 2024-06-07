@@ -222,7 +222,7 @@ if predict_button:
         ], verbose=True, remainder='drop')
     input_trans = ct_.fit_transform(user_input_df)
 
-    predicted_category = predict_case(user_input, selected_model)
+    predicted_category = predict_case(input_trans, selected_model)
     st.subheader("Unprocessed user inputs")
     st.dataframe(user_input_df)
     st.subheader("Unprocessed user inputs")
