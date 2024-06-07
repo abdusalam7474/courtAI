@@ -205,8 +205,8 @@ with col2:
         months_selected = st.selectbox("Select Age Range (Months)", months_options)
         user_input[0]["Sentence (Years)"] = months_selected
 # Display the user input
-if user_input["Sentence (Years)"] is not None:
-    st.write("Sentence Years:", user_input["Sentence (Years)"])
+if user_input[0]["Sentence (Years)"] is not None:
+    st.write("Sentence Years:", user_input[0]["Sentence (Years)"])
 
 
 # Prediction button and results section
