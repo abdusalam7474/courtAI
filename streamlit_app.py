@@ -153,11 +153,12 @@ with col2:
 with col3:
     prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
 
-col1, col2 = st.columns(2)
 st.markdown(
     """
     **Use the following options to describe the Sentence time:**
     """)
+col1, col2 = st.columns(2)
+
 # Define the list of options
 options = [
     "2 Years & Less", "SAFPF", "11 to 12 Months", "31 to 40 Years",
