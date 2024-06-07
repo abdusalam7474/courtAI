@@ -1,4 +1,4 @@
-import streamlit as st
+           import streamlit as st
 import pandas as pd
 import random
 import joblib
@@ -11,15 +11,15 @@ st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
 # (Replace with your actual machine learning model)
 def predict_case(data, model):
-    df = pd.DataFrame.from_dict(data, orient='index')
+    #df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
     #pred = model.predict(data)
     pred = [0,1]
     if pred[0] == 1:
-        predicted_category = "Normal"
+        predicted_category = "Normal" 
     else:
         predicted_category = "Possible Attack"
-    return predicted_category, df
+    return predicted_category
 
 def predict_intrusion_(data, model):
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -215,14 +215,17 @@ predict_button = st.button("Predict")
 if predict_button:
     user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
     user_input[0]["Sentence (Years)"] = (preset["Sentence (Years)"]).iloc[0]
+    
+    #convert user input to dataframe
+    user_input_df = pd.DataFrame.from_dict(user_input, orient='index')
     #vectorize inputs
     ct_ = ColumnTransformer(
         [("text_preprocess", vects["count_vect_y"], "Sentence (Years)"),
          ("text_preprocess2", vects["count_vect_o"], "Offense Description"),
         ], verbose=True, remainder='drop')
-    input_trans = ct_.fit_transform(user_input)
+    input_trans = ct_.fit_transform(user_input_df)
 
-    predicted_category, data_df = predict_intrusion_(user_input, selected_model)
+    predicted_category = predict_case(user_input, selected_model)
     st.subheader("Prediction Results")
-    st.dataframe(data_df)
+    st.dataframe(user_input_df)
     st.write("Predicted Category:", predicted_category)
