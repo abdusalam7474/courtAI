@@ -13,12 +13,9 @@ st.set_page_config(page_title="Court Case Prediction", layout="wide")
 def predict_case(data, model):
     #df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
-    #pred = model.predict(data)
-    pred = [0,1]
-    if pred[0] == 1:
-        predicted_category = "Normal" 
-    else:
-        predicted_category = "Possible Attack"
+    pred = model.predict(data)
+    #pred = [0,1]
+    predicted_category = pred
     return predicted_category
 
 def predict_intrusion_(data, model):
@@ -226,6 +223,10 @@ if predict_button:
     input_trans = ct_.fit_transform(user_input_df)
 
     predicted_category = predict_case(user_input, selected_model)
-    st.subheader("Prediction Results")
+    st.subheader("Unprocessed user inputs")
     st.dataframe(user_input_df)
+    st.subheader("Unprocessed user inputs")
+    st.dataframe(input_trans)
+    
+    st.subheader("Prediction Results")
     st.write("Predicted Category:", predicted_category)
