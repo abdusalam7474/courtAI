@@ -141,6 +141,10 @@ with col3:
     user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="DD/MM/YYYY")
 
 col1, col2, col3= st.columns(3)
+st.markdown(
+    """
+    **Use the following options to describe the offence;**
+    """)
 with col1:
     theft_or_larcency = st.selectbox("THEFT OR LARCENCY DEFINITION", theft_or_larc_opts, key="theft_descr")
     #user_input[0]["Offense Description"] = st.selectbox("Offense Description", value=(preset["Offense Description"]).iloc[0])
@@ -148,6 +152,53 @@ with col2:
     amount = st.selectbox("Amount or Worth of Stolen Item ($)", amount_opts, key="amount_in_que")
 with col3:
     prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
+
+st.markdown(
+    """
+    **Use the following options to describe the Sentence time:**
+    """)
+import streamlit as st
+
+# Define the list of options
+options = [
+    "2 Years & Less", "SAFPF", "11 to 12 Months", "31 to 40 Years",
+    "11 to 15 Years", "8 Years", "21 to 25 Years", "16 to 20 Years",
+    "7 Years", "6 Months & Less", "23 to 24 Months & More",
+    "15 to 16 Months", "3 Years", "8 to 9 Months", "5 Years",
+    "9 Years", "6 Years", "14 to 15 Months", "60 Years +",
+    "7 to 8 Months", "10 Years", "13 to 14 Months", "4 Years",
+    "9 to 10 Months", "26 to 30 Years", "12 to 13 Months", "Life",
+    "41 to 59 Years", "17 to 18 Months", "10 to 11 Months",
+    "6 to 7 Months", "19 to 20 Months", "21 to 22 Months",
+    "16 to 17 Months", "20 to 21 Months"
+]
+
+# Create empty user_input dictionary
+user_input = {}
+#user_input["Sentence (Years)"] = None
+
+# Create radio buttons for categories (Years, Months)
+category_options = ["Years", "Months"]
+with col1:
+    category_selected = st.radio("Select Category", category_options)
+with col2:
+    # Years options
+    if category_selected == "Years":
+        years_options = [opt for opt in options if "Years" in opt]
+        years_selected = st.selectbox("Select Age Range (Years)", years_options)
+        user_input["Sentence (Years)"] = years_selected
+
+    # Months options
+    elif category_selected == "Months":
+        months_options = [opt for opt in options if "Months" in opt]
+        months_selected = st.selectbox("Select Age Range (Months)", months_options)
+        user_input["Sentence (Years)"] = months_selected
+
+# Display the user input
+if user_input["Sentence (Years)"] is not None:
+    st.write("Your selected input:", user_input["Sentence (Years)"])
+
+
 # Prediction button and results section
 predict_button = st.button("Predict")
 
