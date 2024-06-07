@@ -216,7 +216,6 @@ if predict_button:
     user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
     user_input[0]["Sentence (Years)"] = (preset["Sentence (Years)"]).iloc[0]
     #vectorize inputs
-
     ct_ = ColumnTransformer(
         [("text_preprocess", vects["count_vect_y"], "Sentence (Years)"),
          ("text_preprocess2", vects["count_vect_o"], "Offense Description"),
