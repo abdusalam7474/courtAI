@@ -140,6 +140,7 @@ with col3:
     user_input[0]["Offense"] = st.selectbox("Offense", offense_opts)
     user_input[0]["Release Date"] = st.date_input("Release Date", value=(preset["Release Date"]).iloc[0], format="DD/MM/YYYY")
 
+st.write("") #to create space
 st.markdown(
     """
     **Use the following options to describe the offence;**
@@ -153,6 +154,7 @@ with col2:
 with col3:
     prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
 
+st.write("") #to create space
 st.markdown(
     """
     **Use the following options to describe the Sentence time:**
@@ -195,7 +197,7 @@ with col2:
         user_input["Sentence (Years)"] = months_selected
 # Display the user input
 if user_input["Sentence (Years)"] is not None:
-    st.write("Your selected input:", user_input["Sentence (Years)"])
+    st.write("Sentence Years:", user_input["Sentence (Years)"])
 
 
 # Prediction button and results section
