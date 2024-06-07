@@ -9,7 +9,7 @@ from sklearn.compose import ColumnTransformer
 
 st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
-# (Replace with your actual machine learning model)
+# (Replace with your actual machine learning model).
 def predict_case(data, model):
     #df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
