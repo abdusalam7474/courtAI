@@ -74,7 +74,7 @@ user_input = {
 
 @st.cache_resource
 def load_models():
-   loaded_rf = joblib.load('rf_model.pkl')
+   loaded_rf = joblib.load('rf_model_2i.pkl')
    loaded_svm = joblib.load('svm_model.pkl')
    loaded_dt = joblib.load('dtree_model.pkl')
    vect1 = joblib.load('count_vect.pkl')
