@@ -90,7 +90,7 @@ def load_models():
     "Decision Tree":loaded_dt,
    }
    vects = {
-       "count_vect_o": vect2
+       "count_vect_o": vect2,
        "count_vect_y": vect3
    }
    return models, vects
