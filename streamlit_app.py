@@ -15,7 +15,7 @@ def predict_case(data, model):
     #df = df.transpose()
     pred = model.predict(data)
     #pred = [0,1]
-    predicted_category = pred
+    predicted_category = Release_type_encoder.inverse_transform(pred)[0]
     return predicted_category
 
 def predict_intrusion_(data, model):
@@ -91,9 +91,18 @@ def load_models():
        "col_tf_sy": vect2,
        "col_tf_ai": vect3
    }
-   return models, vects
 
-models, vects = load_models()
+   encds = [
+       "Release_type_encoder":joblib.load('Release_type_encoder.pkl')
+       "county_encoder":joblib.load('county_encoder.pkl')
+       "Gender_encoder":joblib.load('Gender_encoder.pkl')
+       "Inmate_encoder":joblib.load('Inmate_encoder.pkl')
+       "Race_encoder":joblib.load('Race_encoder.pkl')
+       "Offense_encoder":joblib.load('Offense_encoder.pkl')
+   }
+   return models, vects, encds
+
+models, vects, encds = load_models()
 
 theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
