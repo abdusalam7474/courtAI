@@ -190,9 +190,9 @@ col1, col2 = st.columns(2)
 
 # Define the list of options
 options = [
-    "2 Years & Less", "SAFPF", "11 to 12 Months", "31 to 40 Years",
+    "2 Years and Less", "SAFPF", "11 to 12 Months", "31 to 40 Years",
     "11 to 15 Years", "8 Years", "21 to 25 Years", "16 to 20 Years",
-    "7 Years", "6 Months & Less", "23 to 24 Months & More",
+    "7 Years", "6 Months & Less", "23 to 24 Months and More",
     "15 to 16 Months", "3 Years", "8 to 9 Months", "5 Years",
     "9 Years", "6 Years", "14 to 15 Months", "60 Years +",
     "7 to 8 Months", "10 Years", "13 to 14 Months", "4 Years",
@@ -235,6 +235,19 @@ if predict_button:
     
     #convert user input to dataframe
     user_input_df = pd.DataFrame.from_dict(user_input, orient='index')
+    unprocessed = user_input_df.copy()
+    
+    #preprocessing
+    user_input_df['Release Date'] = user_input_df['Release Date'].to_numpy().astype(int)
+    user_input_df["Sentence Date"] = user_input_df["Sentence Date"].to_numpy().astype(int)
+    user_input_df["Offense Date"] = user_input_df["Offense Date"].to_numpy().astype(int)
+    
+    user_input_df["County"] = encds["county_encoder"].transform(user_input_df["County"])
+    user_input_df["Gender"] = encds["Gender_encoder"].transform(user_input_df["Gender"])
+    user_input_df["Inmate Type"] = encds["Inmate_encoder"].transform(user_input_df["Inmate Type"])
+    user_input_df["Inmate Type"] = encds["Inmate_encoder"].transform(user_input_df["Inmate Type"])
+    user_input_df["Offense"] = encds["county_encoder"].transform(user_input_df["Offense"])
+   
     #vectorize inputs
     input_trans = vects["col_tf_2i"].transform(user_input_df)
 
