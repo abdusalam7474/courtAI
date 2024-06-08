@@ -249,7 +249,7 @@ if predict_button:
     user_input_df["County"] = encds["county_encoder"].transform(user_input_df["County"])
     user_input_df["Gender"] = encds["Gender_encoder"].transform(user_input_df["Gender"])
     user_input_df["Inmate Type"] = encds["Inmate_encoder"].transform(user_input_df["Inmate Type"])
-    user_input_df["Inmate Type"] = encds["Inmate_encoder"].transform(user_input_df["Inmate Type"])
+    user_input_df["Race"] = encds["Race_encoder"].transform(user_input_df["Race"])
     user_input_df["Offense"] = encds["county_encoder"].transform(user_input_df["Offense"])
    
     #vectorize inputs
