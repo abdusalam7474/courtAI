@@ -15,7 +15,7 @@ def predict_case(data, model):
     #df = df.transpose()
     pred = model.predict(data)
     #pred = [0,1]
-    predicted_category = Release_type_encoder.inverse_transform(pred)[0]
+    predicted_category = encds["Release_type_encoder"].inverse_transform(pred)[0]
     return predicted_category
 
 def predict_intrusion_(data, model):
