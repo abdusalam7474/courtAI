@@ -232,7 +232,7 @@ if predict_button:
     st.subheader("Unprocessed user inputs")
     st.dataframe(user_input_df)
     st.subheader("Unprocessed user inputs")
-    st.dataframe(input_trans)
+    st.dataframe(user_input_df)
     
     st.subheader("Prediction Results")
     st.write("Predicted Category:", predicted_category)
