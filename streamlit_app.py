@@ -179,7 +179,7 @@ description_parts = [item for item in description_parts if item is not None]
 user_input[0]["Offense Description"] = " ".join(description_parts)
 # Display the user input
 if user_input[0]["Offense Description"] is not None:
-    st.write("Your selected offense description:", user_input[0]["Offense Description"])
+    st.write("Description of offense:", user_input[0]["Offense Description"])
     
 st.write("") #to create space
 st.markdown(
@@ -230,8 +230,8 @@ if user_input[0]["Sentence (Years)"] is not None:
 predict_button = st.button("Predict")
 
 if predict_button:
-    user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
-    user_input[0]["Sentence (Years)"] = (preset["Sentence (Years)"]).iloc[0]
+    #user_input[0]["Offense Description"] = (preset["Offense Description"]).iloc[0]
+    #user_input[0]["Sentence (Years)"] = (preset["Sentence (Years)"]).iloc[0]
     
     #convert user input to dataframe
     user_input_df = pd.DataFrame.from_dict(user_input, orient='index')
