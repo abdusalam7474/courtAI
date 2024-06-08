@@ -92,7 +92,7 @@ def load_models():
        "col_tf_ai": vect3
    }
 
-   encds = [
+   encds = {
        "Release_type_encoder":joblib.load('Release_type_encoder.pkl')
        "county_encoder":joblib.load('county_encoder.pkl')
        "Gender_encoder":joblib.load('Gender_encoder.pkl')
