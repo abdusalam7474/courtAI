@@ -219,6 +219,38 @@ if user_input[0]["Sentence (Years)"] is not None:
     st.write("Sentence Years:", user_input[0]["Sentence (Years)"])
 
 
+# Define offense categories and value lists
+offense_categories = {
+    "Amount": ["< $1500", "$1500 to < $2500", "$2500 to < $30k", "$30k to < $150k", "$150k to < $200k", "$200k to < $300k", "> $300k"],
+    "Previous Convictions": ["No", "2 or More", "2+ convictions"],
+    "Enhancement": ["No", "ENH IAT"],
+    "Type": [
+        "Theft Property", "Theft of Firearm", "Theft of Service", "Theft Material",
+        "Theft From Person", "Theft of Credit Card", "Organized Retail Theft",
+        "Theft Cattle/Horse/Livestock", "Theft Mail", "Theft Cargo", "Burglary",
+        "Theft Grave/Corpse/Marker", "Theft Livestock"
+    ]
+}
+
+# Empty user input dictionary
+user_input_ = {}
+#user_inpu[0]["Offense Description"] = None
+
+# Create radio buttons for each category
+for category, value_list in offense_categories.items():
+    selected_value = st.radio(f"Select {category}", value_list)
+    user_input_[category] = selected_value
+
+# Combine user selections into description (optional)
+if all(value is not None for value in user_input.values()):
+    description_parts = [user_input_[category] for category in offense_categories.keys()]
+    user_input[0]["Offense Description"] = " ".join(description_parts)
+
+# Display the user input
+if user_input[0]["Offense Description"] is not None:
+    st.write("Your selected offense description:", user_input[0]["Offense Description"])
+
+
 # Prediction button and results section
 predict_button = st.button("Predict")
 
