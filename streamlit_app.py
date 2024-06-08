@@ -238,6 +238,10 @@ if predict_button:
     unprocessed = user_input_df.copy()
     
     #preprocessing
+    user_input_df['Release Date'] = pd.to_datetime(user_input_df["Release Date"])
+    user_input_df["Sentence Date"] = pd.to_datetime(user_input_df["Sentence Date"])
+    user_input_df["Offense Date"] = pd.to_datetime(user_input_df["Offense Date"])
+    
     user_input_df['Release Date'] = user_input_df['Release Date'].to_numpy().astype(int)
     user_input_df["Sentence Date"] = user_input_df["Sentence Date"].to_numpy().astype(int)
     user_input_df["Offense Date"] = user_input_df["Offense Date"].to_numpy().astype(int)
