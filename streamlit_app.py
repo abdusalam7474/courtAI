@@ -253,8 +253,8 @@ if predict_button:
 
     predicted_category, conf = predict_case(input_trans, selected_model)
     st.subheader("Unprocessed user inputs")
-    st.dataframe(user_input_df)
-    st.subheader("Unprocessed user inputs")
+    st.dataframe(unprocessed)
+    st.subheader("Processed user inputs")
     st.dataframe(user_input_df)
     
     st.subheader("Prediction Results")
