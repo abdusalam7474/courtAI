@@ -238,4 +238,4 @@ if predict_button:
     st.dataframe(user_input_df)
     
     st.subheader("Prediction Results")
-    st.write("Predicted Category:", predicted_category, "with a confidence score of:", conf*100)
+    st.write("Predicted Release type ::::", predicted_category, "::::", " with a confidence score of:", conf*100, %)
