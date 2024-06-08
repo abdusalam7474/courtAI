@@ -13,10 +13,12 @@ st.set_page_config(page_title="Court Case Prediction", layout="wide")
 def predict_case(data, model):
     #df = pd.DataFrame.from_dict(data, orient='index')
     #df = df.transpose()
-    pred = model.predict(data)
-    #pred = [0,1]
+    predictions = model.predict_proba(data)
+    pred = np.argmax(predictions, axis=1)
+    conf = predictions[0][pred[0]]
+
     predicted_category = encds["Release_type_encoder"].inverse_transform(pred)[0]
-    return predicted_category
+    return predicted_category, conf
 
 def predict_intrusion_(data, model):
     df = pd.DataFrame.from_dict(data, orient='index')
@@ -228,11 +230,11 @@ if predict_button:
     #vectorize inputs
     input_trans = vects["col_tf_2i"].transform(user_input_df)
 
-    predicted_category = predict_case(input_trans, selected_model)
+    predicted_category, conf = predict_case(input_trans, selected_model)
     st.subheader("Unprocessed user inputs")
     st.dataframe(user_input_df)
     st.subheader("Unprocessed user inputs")
     st.dataframe(user_input_df)
     
     st.subheader("Prediction Results")
-    st.write("Predicted Category:", predicted_category)
+    st.write("Predicted Category:", predicted_category, "with a confidence score of:", conf*100)
