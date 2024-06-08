@@ -107,7 +107,7 @@ def load_models():
 
 models, vects, encds = load_models()
 
-theft_or_larc_opts = [(preset["Offense"]).iloc[0],"THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
+theft_or_larc_opts = ["THEFT PROPERTY", "LARCENCY-THEFT OF CREDIT CARD", "THEFT OF FIREARM", "LARCENCY THEFT OF PERSON", "STOLEN VEHICLE THEFT", "THEFT FROM PERSON", "THEFT OF SERVICE", "LARCENSY THEFT OF PROPERTY", "THEFT OF MATERIAL ALUMINUM or BRONZE or COPPER or BRASS"]
 amount_opts = ["less than 1,500", "less than 2,500", "greater than or equal to 2,500, less than 30K", "greater than or equal to 20K less than 100k", "greater than 200k", "greater than or equal to 30K, less than 150k", "greater than or equal to 1,500, less than 20K", "less than 20K"]
 race_opts = [(preset["Race"]).iloc[0], 'White', 'Black', 'Hispanic', 'Asian', 'American Indian/Alaskin', 'Other']
 inmate_opts = [(preset["Inmate Type"]).iloc[0], 'G2', 'FT', 'J2', 'DP', 'IT', 'OT', 'J1', 'MD', 'G1', 'G4', 'S1', 'PR', 'P2', 'G5', 'RP', 'MH', 'J5', 'J4', 'VI', 'PS', 'RF', 'PJ', '1A', 'XX', 'CG', 'CP', 'II', 'P4']
@@ -171,7 +171,7 @@ with col1:
 with col2:
     amount = st.selectbox("Amount or Worth of Stolen Item ($)", amount_opts, key="amount_in_que")
 with col3:
-    prev_conv = st.selectbox("Previous Convictions (if any):", [None, "2 or more previous convictions"])
+    prev_conv = st.selectbox("Previous Convictions (if any):", ["", "2 or more previous convictions"])
 description_parts = [theft_or_larcency, amount, prev_conv]
 user_input[0]["Offense Description"] = " ".join(description_parts)
 # Display the user input
