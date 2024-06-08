@@ -93,11 +93,11 @@ def load_models():
    }
 
    encds = {
-       "Release_type_encoder":joblib.load('Release_type_encoder.pkl')
-       "county_encoder":joblib.load('county_encoder.pkl')
-       "Gender_encoder":joblib.load('Gender_encoder.pkl')
-       "Inmate_encoder":joblib.load('Inmate_encoder.pkl')
-       "Race_encoder":joblib.load('Race_encoder.pkl')
+       "Release_type_encoder":joblib.load('Release_type_encoder.pkl'),
+       "county_encoder":joblib.load('county_encoder.pkl'),
+       "Gender_encoder":joblib.load('Gender_encoder.pkl'),
+       "Inmate_encoder":joblib.load('Inmate_encoder.pkl'),
+       "Race_encoder":joblib.load('Race_encoder.pkl'),
        "Offense_encoder":joblib.load('Offense_encoder.pkl')
    }
    return models, vects, encds
