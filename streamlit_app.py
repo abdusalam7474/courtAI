@@ -175,7 +175,7 @@ with col3:
 with col4:
     enhance = st.selectbox("Enhancement (if any):", ["", "ENH IAT"])
 description_parts = [theft_or_larcency, amount, prev_conv, enhance]
-description_parts = [item fot item in description_parts if item is not None]
+description_parts = [item, fot item in description_parts if item is not None]
 user_input[0]["Offense Description"] = " ".join(description_parts)
 # Display the user input
 if user_input[0]["Offense Description"] is not None:
