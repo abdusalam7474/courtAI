@@ -258,8 +258,14 @@ if predict_button:
     predicted_category, conf = predict_case(input_trans, selected_model)
     st.subheader("Unprocessed user inputs")
     st.dataframe(unprocessed)
+
+    #rounding date cols to a specific lenght:
+    user_input_df_ = user_input_df.copy()
+    user_input_df_['Release Date'] = user_input_df_['Release Date'].astype(str)
+    user_input_df_['Sentence Date'] = user_input_df_['Sentence Date'].astype(str)
+    user_input_df_['Offense Date'] = user_input_df_['Offense Date'].astype(str)
     st.subheader("Processed user inputs")
-    st.dataframe(user_input_df)
+    st.dataframe(user_input_df_)
     
     st.subheader("Prediction Results")
     st.write("Predicted Release type ::::", predicted_category, "::::", " with a confidence score of:", conf*100, "%")
