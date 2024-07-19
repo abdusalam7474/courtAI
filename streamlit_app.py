@@ -8,11 +8,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.compose import ColumnTransformer
 
+
+st.set_page_config(page_title="Court Case Prediction", layout="wide")
 import platform
 version = platform.python_version()
 st.write(version)
-
-st.set_page_config(page_title="Court Case Prediction", layout="wide")
 
 # (Replace with your actual machine learning model).
 def predict_case(data, model):
