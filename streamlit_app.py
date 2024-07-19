@@ -8,6 +8,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.compose import ColumnTransformer
 
+import platform
 version = platform.python_version()
 st.write(version)
 
