@@ -83,7 +83,7 @@ user_input = {
 def load_models():
    loaded_rf = joblib.load('rf_model_2i.pkl')
    loaded_svm = joblib.load('svm_model_2i.pkl')
-   loaded_dt = joblib.load('knn_model_2i.pkl')
+   loaded_knn = joblib.load('knn_model_2i.pkl')
    vect1 = joblib.load('col_tf_2i.pkl')
    vect2 = joblib.load('col_tf_y.pkl') 
    vect3 = joblib.load('col_tf_ai.pkl')
@@ -91,7 +91,7 @@ def load_models():
    models = {
     "Random forest":loaded_rf,
     "Support Vector Machine":loaded_svm,
-    "Decision Tree":loaded_dt,
+    "K Nearest Neighbor":loaded_knn,
    }
    vects = {
        "col_tf_2i": vect1,
@@ -125,7 +125,7 @@ county_opts = [(preset["County"]).iloc[0], 'Houston', 'Dallas', 'Victoria', 'Ang
 with st.sidebar:
     st.header("Settings")
     # Add options for model selection, data preprocessing, etc. (if applicable)
-    model_name = st.selectbox("select the model for prediction", ["Random forest", "Support Vector Machine", "Decision Tree"])
+    model_name = st.selectbox("select the model for prediction", ["Random forest", "Support Vector Machine", "K Nearest Neighbor"])
     selected_model = models[model_name]
 
 st.title("Court Case Prediction App")
